@@ -1,0 +1,18 @@
+ssh -i "path/to/ahead.pem" ubuntu@<NEW_INSTANCE_PUBLIC_IP>
+
+# Update packages
+sudo apt update && sudo apt upgrade -y
+
+# Install Git
+sudo apt install git -y
+
+sudo mkdir -p /var/www/html
+
+sudo chown -R ubuntu:ubuntu /var/www/html
+
+git clone https://github.com/wizard734/my-portfolio.git /var/www/html
+
+sudo apt update && sudo apt install apache2 -y
+sudo systemctl start apache2
+
+ls -la /var/www/html
