@@ -1,0 +1,28 @@
+# 1. Clone your GitHub repo
+git clone https://github.com/your-username/calculator-app.git
+cd calculator-app
+
+# 2. (Optional) View project structure
+ls
+
+# 3. Create or confirm requirements.txt contains necessary dependencies
+echo -e "Flask==2.3.3\ngunicorn==20.1.0" > requirements.txt
+
+# 4. Create app.yaml (if not already present)
+cat <<EOF > app.yaml
+runtime: python310
+entrypoint: gunicorn -b :$PORT main:app
+
+handlers:
+- url: /.*
+  script: auto
+EOF
+
+# 5. Deploy to App Engine
+gcloud app deploy
+
+# 6. Browse deployed app
+gcloud app browse
+
+# 7. (Optional) View logs
+gcloud app logs tail -s default
